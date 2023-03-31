@@ -1,10 +1,14 @@
 import "./App.css"
+import AddPostForm from "./features/posts/AddPostForm"
+import PostsList from "./features/posts/PostsList"
 
 function App() {
   return (
-    <div className="App">
+    <main className="App">
       <h1>APP</h1>
-    </div>
+      <AddPostForm />
+      <PostsList />
+    </main>
   )
 }
 
