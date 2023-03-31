@@ -17,8 +17,16 @@ const postsSlice = createSlice({
   name: "posts",
   initialState,
   reducers: {
-    addPost(state, action) {
-      state.unshift(action.payload)
+    addPost: {
+      reducer(state, action) {
+        state.unshift(action.payload)
+      },
+      // Prepare callback, get data to format first
+      prepare(title, content) {
+        return {
+          payload: { title, content, id: nanoid() },
+        }
+      },
     },
   },
 })

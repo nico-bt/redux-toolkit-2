@@ -1,4 +1,3 @@
-import { nanoid } from "@reduxjs/toolkit"
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 
@@ -18,7 +17,8 @@ const AddPostForm = () => {
 
   const onSavePostClicked = () => {
     if (title && content) {
-      dispatch(addPost({ title, content, id: nanoid() }))
+      // addPost tiene una prepare callback, por eso no va  la data como {}
+      dispatch(addPost(title, content))
       setTitle("")
       setContent("")
     }
