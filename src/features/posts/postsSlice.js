@@ -22,9 +22,9 @@ const postsSlice = createSlice({
         state.unshift(action.payload)
       },
       // Prepare callback, get data to format first
-      prepare(title, content) {
+      prepare(title, content, userId) {
         return {
-          payload: { title, content, id: nanoid() },
+          payload: { title, content, id: nanoid(), userId },
         }
       },
     },

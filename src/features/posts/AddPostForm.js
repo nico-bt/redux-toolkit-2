@@ -2,7 +2,7 @@ import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 
 import { addPost } from "./postsSlice"
-// import { selectAllUsers } from "../users/usersSlice"
+import { selectAllUsers } from "../users/usersSlice"
 
 const AddPostForm = () => {
   const dispatch = useDispatch()
@@ -11,14 +11,12 @@ const AddPostForm = () => {
   const [content, setContent] = useState("")
   const [userId, setUserId] = useState("")
 
-  //   const users = useSelector(selectAllUsers)
-
-  //   const onAuthorChanged = (e) => setUserId(e.target.value)
+  const users = useSelector(selectAllUsers)
 
   const onSavePostClicked = () => {
     if (title && content) {
-      // addPost tiene una prepare callback, por eso no va  la data como {}
-      dispatch(addPost(title, content))
+      // addPost tiene una prepare callback, por eso no va la data como {}
+      dispatch(addPost(title, content, userId))
       setTitle("")
       setContent("")
     }
@@ -26,11 +24,11 @@ const AddPostForm = () => {
 
   const canSave = Boolean(title) && Boolean(content) // && Boolean(userId)
 
-  //   const usersOptions = users.map((user) => (
-  //     <option key={user.id} value={user.id}>
-  //       {user.name}
-  //     </option>
-  //   ))
+  const usersOptions = users.map((user) => (
+    <option key={user.id} value={user.id}>
+      {user.name}
+    </option>
+  ))
 
   return (
     <section>
@@ -44,11 +42,17 @@ const AddPostForm = () => {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
-        {/* <label htmlFor="postAuthor">Author:</label> */}
-        {/* <select id="postAuthor" value={userId} onChange={onAuthorChanged}>
+
+        <label htmlFor="postAuthor">Author:</label>
+        <select
+          id="postAuthor"
+          value={userId}
+          onChange={(e) => setUserId(e.target.value)}
+        >
           <option value=""></option>
           {usersOptions}
-        </select> */}
+        </select>
+
         <label htmlFor="postContent">Content:</label>
         <textarea
           id="postContent"
