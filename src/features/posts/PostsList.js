@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux"
 import PostAuthor from "./PostAuthor"
 import { selectAllPosts } from "./postsSlice"
+import ReactionButtons from "./ReactionButtons"
 
 const PostsList = () => {
   // const posts = useSelector((state) => state.posts)
@@ -17,6 +18,7 @@ const PostsList = () => {
       <p className="postCredit">
         <PostAuthor userId={post.userId} />
       </p>
+      <ReactionButtons post={post} />
     </article>
   ))
 
